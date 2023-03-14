@@ -1,4 +1,4 @@
-package com.blaze.house.navigation;
+package org.pixel.extend.navigation;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -15,7 +15,7 @@ import android.view.View;
 
 import com.android.settings.R;
 
-import com.blaze.house.navigation.BubbleNavigationChangeListener;
+import org.pixel.extend.navigation.BubbleNavigationChangeListener;
 
 import java.util.ArrayList;
 
@@ -25,7 +25,8 @@ import java.util.ArrayList;
  */
 
 @SuppressWarnings("unused")
-public class BubbleNavigationConstraintView extends ConstraintLayout implements View.OnClickListener, IBubbleNavigation {
+public class BubbleNavigationConstraintView extends ConstraintLayout
+        implements View.OnClickListener, IBubbleNavigation {
 
     enum DisplayMode {
         SPREAD,
@@ -33,7 +34,7 @@ public class BubbleNavigationConstraintView extends ConstraintLayout implements 
         PACKED
     }
 
-    //constants
+    // constants
     private static final String TAG = "ExtendedView";
     private static final int MIN_ITEMS = 2;
     private static final int MAX_ITEMS = 5;
@@ -44,7 +45,7 @@ public class BubbleNavigationConstraintView extends ConstraintLayout implements 
     private int currentActiveItemPosition = 0;
     private boolean loadPreviousState;
 
-    //default display mode
+    // default display mode
     private DisplayMode displayMode = DisplayMode.SPREAD;
 
     private Typeface currentTypeface;
@@ -108,7 +109,7 @@ public class BubbleNavigationConstraintView extends ConstraintLayout implements 
             }
         }
 
-        //sets appropriate display node
+        // sets appropriate display node
         if (mode >= 0 && mode < DisplayMode.values().length)
             displayMode = DisplayMode.values()[mode];
 
@@ -140,7 +141,8 @@ public class BubbleNavigationConstraintView extends ConstraintLayout implements 
     }
 
     /**
-     * Finds Child Elements of type {@link BubbleToggleView} and adds them to {@link #bubbleNavItems}
+     * Finds Child Elements of type {@link BubbleToggleView} and adds them to
+     * {@link #bubbleNavItems}
      */
     private void updateChildNavItems() {
         bubbleNavItems = new ArrayList<>();
@@ -170,7 +172,8 @@ public class BubbleNavigationConstraintView extends ConstraintLayout implements 
     }
 
     /**
-     * Creates the chains to spread the {@link #bubbleNavItems} based on the {@link #displayMode}
+     * Creates the chains to spread the {@link #bubbleNavItems} based on the
+     * {@link #displayMode}
      */
     private void createChains() {
         ConstraintSet constraintSet = new ConstraintSet();
@@ -183,18 +186,18 @@ public class BubbleNavigationConstraintView extends ConstraintLayout implements 
             int id = bubbleNavItems.get(i).getId();
             chainIdsList[i] = id;
             chainWeightList[i] = 0.0f;
-            //set the top and bottom constraint for each items
+            // set the top and bottom constraint for each items
             constraintSet.connect(id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0);
             constraintSet.connect(id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0);
         }
 
-        //create an horizontal chain
+        // create an horizontal chain
         constraintSet.createHorizontalChain(getId(), ConstraintSet.LEFT,
                 getId(), ConstraintSet.RIGHT,
                 chainIdsList, chainWeightList,
                 getChainTypeFromMode(displayMode));
 
-        //apply the constraint
+        // apply the constraint
         constraintSet.applyTo(this);
     }
 
@@ -203,7 +206,8 @@ public class BubbleNavigationConstraintView extends ConstraintLayout implements 
      */
     private void setInitialActiveState() {
 
-        if (bubbleNavItems == null) return;
+        if (bubbleNavItems == null)
+            return;
 
         boolean foundActiveElement = false;
 
@@ -222,7 +226,7 @@ public class BubbleNavigationConstraintView extends ConstraintLayout implements 
                 bubbleNavItems.get(i).setInitialState(false);
             }
         }
-        //set the active element
+        // set the active element
         if (!foundActiveElement)
             bubbleNavItems.get(currentActiveItemPosition).setInitialState(true);
     }
@@ -233,7 +237,8 @@ public class BubbleNavigationConstraintView extends ConstraintLayout implements 
     private void updateMeasurementForItems() {
         int numChildElements = bubbleNavItems.size();
         if (numChildElements > 0) {
-            int calculatedEachItemWidth = (getMeasuredWidth() - (getPaddingRight() + getPaddingLeft())) / numChildElements;
+            int calculatedEachItemWidth = (getMeasuredWidth() - (getPaddingRight() + getPaddingLeft()))
+                    / numChildElements;
             for (BubbleToggleView btv : bubbleNavItems)
                 btv.updateMeasurements(calculatedEachItemWidth);
         }
@@ -312,7 +317,8 @@ public class BubbleNavigationConstraintView extends ConstraintLayout implements 
             return;
         }
 
-        if (currentActiveItemPosition == position) return;
+        if (currentActiveItemPosition == position)
+            return;
 
         if (position < 0 || position >= bubbleNavItems.size())
             return;
@@ -335,7 +341,7 @@ public class BubbleNavigationConstraintView extends ConstraintLayout implements 
             if (newActiveToggleView != null)
                 newActiveToggleView.toggle();
 
-            //changed the current active position
+            // changed the current active position
             currentActiveItemPosition = changedPosition;
 
             if (navigationChangeListener != null)

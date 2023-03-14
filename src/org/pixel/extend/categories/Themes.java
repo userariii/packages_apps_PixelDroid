@@ -14,12 +14,15 @@
  * limitations under the License.
  */
 
-package com.blaze.house.categories;
+package org.pixel.extend.categories;
 
 import android.content.Context;
 import android.content.ContentResolver;
+import android.content.res.Resources;
 import android.os.Bundle;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+
 import androidx.preference.PreferenceScreen;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 
@@ -27,16 +30,16 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-public class StatusBar extends SettingsPreferenceFragment implements
+public class Themes extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
 
-    private static final String TAG = "StatusBar";
+    private static final String TAG = "Themes";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.status_bar);
+        addPreferencesFromResource(R.xml.themes);
 
         ContentResolver resolver = getActivity().getContentResolver();
 
@@ -44,7 +47,7 @@ public class StatusBar extends SettingsPreferenceFragment implements
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.CUSTOM_SETTINGS;
+        return MetricsProto.MetricsEvent.BLAZE_HOUSE;
     }
 
     @Override
@@ -61,6 +64,4 @@ public class StatusBar extends SettingsPreferenceFragment implements
         final String key = preference.getKey();
         return true;
     }
-
 }
-

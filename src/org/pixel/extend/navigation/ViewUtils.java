@@ -1,4 +1,4 @@
-package com.blaze.house.navigation;
+package org.pixel.extend.navigation;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
@@ -17,7 +17,8 @@ public class ViewUtils {
     }
 
     public static void updateDrawableColor(@Nullable Drawable drawable, int color) {
-        if (drawable == null) return;
+        if (drawable == null)
+            return;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             drawable.setTint(color);
         else

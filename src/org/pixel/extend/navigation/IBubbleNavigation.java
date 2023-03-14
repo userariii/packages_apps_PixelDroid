@@ -1,7 +1,7 @@
-package com.blaze.house.navigation;
+package org.pixel.extend.navigation;
 
 import android.graphics.Typeface;
-import com.blaze.house.navigation.BubbleNavigationChangeListener;
+import org.pixel.extend.navigation.BubbleNavigationChangeListener;
 
 @SuppressWarnings("unused")
 public interface IBubbleNavigation {

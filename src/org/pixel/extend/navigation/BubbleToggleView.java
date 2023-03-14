@@ -1,4 +1,4 @@
-package com.blaze.house.navigation;
+package org.pixel.extend.navigation;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -28,7 +28,7 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settingslib.Utils;
 
-import com.blaze.house.navigation.ViewUtils;
+import org.pixel.extend.navigation.ViewUtils;
 
 /**
  * BubbleToggleView
@@ -74,14 +74,16 @@ public class BubbleToggleView extends RelativeLayout {
     @Override
     public void onRtlPropertiesChanged(int layoutDirection) {
         super.onRtlPropertiesChanged(layoutDirection);
-        int viewCompatLayoutDirection = layoutDirection == View.LAYOUT_DIRECTION_RTL ? ViewCompat.LAYOUT_DIRECTION_RTL : ViewCompat.LAYOUT_DIRECTION_LTR;
+        int viewCompatLayoutDirection = layoutDirection == View.LAYOUT_DIRECTION_RTL ? ViewCompat.LAYOUT_DIRECTION_RTL
+                : ViewCompat.LAYOUT_DIRECTION_LTR;
         if (viewCompatLayoutDirection != mLayoutDirection) {
             mLayoutDirection = viewCompatLayoutDirection;
         }
 
         if (isRtl())
             setGravity(Gravity.START);
-        else setGravity(Gravity.CENTER);
+        else
+            setGravity(Gravity.CENTER);
     }
 
     private boolean isRtl() {
@@ -105,7 +107,6 @@ public class BubbleToggleView extends RelativeLayout {
         mLayoutDirection = ss.mLayoutDirection;
         super.onRestoreInstanceState(ss.mViewPagerSavedState);
     }
-
 
     public static class SavedState implements Parcelable {
 
@@ -136,9 +137,9 @@ public class BubbleToggleView extends RelativeLayout {
             out.writeInt(mLayoutDirection);
         }
 
-        // The `CREATOR` field is used to create the parcelable from a parcel, even though it is never referenced directly.
-        public static final Parcelable.ClassLoaderCreator<SavedState> CREATOR
-                = new Parcelable.ClassLoaderCreator<SavedState>() {
+        // The `CREATOR` field is used to create the parcelable from a parcel, even
+        // though it is never referenced directly.
+        public static final Parcelable.ClassLoaderCreator<SavedState> CREATOR = new Parcelable.ClassLoaderCreator<SavedState>() {
 
             @Override
             public SavedState createFromParcel(Parcel source) {
@@ -174,7 +175,7 @@ public class BubbleToggleView extends RelativeLayout {
      * @param attrs   custom attributes
      */
     private void init(Context context, @Nullable AttributeSet attrs) {
-        //initialize default component
+        // initialize default component
         String title = "Title";
         Drawable icon = null;
         Drawable shape = null;
@@ -195,7 +196,8 @@ public class BubbleToggleView extends RelativeLayout {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
                     icon = ta.getDrawable(R.styleable.BubbleToggleView_extensions_icon);
                 else
-                icon = AppCompatResources.getDrawable(getContext(), ta.getResourceId(R.styleable.BubbleToggleView_extensions_icon, R.drawable.default_icon));
+                    icon = AppCompatResources.getDrawable(getContext(),
+                            ta.getResourceId(R.styleable.BubbleToggleView_extensions_icon, R.drawable.default_icon));
                 iconWidth = ta.getDimension(R.styleable.BubbleToggleView_extensions_iconWidth, iconWidth);
                 iconHeight = ta.getDimension(R.styleable.BubbleToggleView_extensions_iconHeight, iconHeight);
                 shape = ta.getDrawable(R.styleable.BubbleToggleView_extensions_shape);
@@ -207,23 +209,26 @@ public class BubbleToggleView extends RelativeLayout {
                 titleColorActive = ta.getColor(R.styleable.BubbleToggleView_extensions_titleColorActive, colorActive);
                 colorInactive = ta.getColor(R.styleable.BubbleToggleView_extensions_colorInactive, colorInactive);
                 isActive = ta.getBoolean(R.styleable.BubbleToggleView_extensions_active, false);
-                animationDuration = ta.getInteger(R.styleable.BubbleToggleView_extensions_duration, DEFAULT_ANIM_DURATION);
-                internalPadding = (int) ta.getDimension(R.styleable.BubbleToggleView_extensions_padding, internalPadding);
-                titlePadding = (int) ta.getDimension(R.styleable.BubbleToggleView_extensions_titlePadding, titlePadding);
+                animationDuration = ta.getInteger(R.styleable.BubbleToggleView_extensions_duration,
+                        DEFAULT_ANIM_DURATION);
+                internalPadding = (int) ta.getDimension(R.styleable.BubbleToggleView_extensions_padding,
+                        internalPadding);
+                titlePadding = (int) ta.getDimension(R.styleable.BubbleToggleView_extensions_titlePadding,
+                        titlePadding);
             } finally {
                 ta.recycle();
             }
         }
 
-        //set the default icon
+        // set the default icon
         if (icon == null)
             icon = ContextCompat.getDrawable(context, R.drawable.default_icon);
 
-        //set the default shape
+        // set the default shape
         if (shape == null)
             shape = ContextCompat.getDrawable(context, R.drawable.transition_background_drawable);
 
-        //create a default bubble item
+        // create a default bubble item
         bubbleToggleItem = new BubbleToggleItem();
         bubbleToggleItem.setIcon(icon);
         bubbleToggleItem.setShape(shape);
@@ -238,12 +243,13 @@ public class BubbleToggleView extends RelativeLayout {
         bubbleToggleItem.setIconHeight(iconHeight);
         bubbleToggleItem.setInternalPadding(internalPadding);
 
-        //set the gravity
+        // set the gravity
         if (isRtl())
             setGravity(Gravity.START);
-        else setGravity(Gravity.CENTER);
+        else
+            setGravity(Gravity.CENTER);
 
-        //set the internal padding
+        // set the internal padding
         setPadding(
                 bubbleToggleItem.getInternalPadding(),
                 bubbleToggleItem.getInternalPadding(),
@@ -252,7 +258,7 @@ public class BubbleToggleView extends RelativeLayout {
         post(new Runnable() {
             @Override
             public void run() {
-                //make sure the padding is added
+                // make sure the padding is added
                 setPadding(
                         bubbleToggleItem.getInternalPadding(),
                         bubbleToggleItem.getInternalPadding(),
@@ -266,21 +272,23 @@ public class BubbleToggleView extends RelativeLayout {
     }
 
     /**
-     * Create the components of the bubble item view {@link #iconView} and {@link #titleView}
+     * Create the components of the bubble item view {@link #iconView} and
+     * {@link #titleView}
      *
      * @param context current context
      */
     private void createBubbleItemView(Context context) {
 
-        //create the nav icon
+        // create the nav icon
         iconView = new ImageView(context);
         iconView.setId(ViewCompat.generateViewId());
-        LayoutParams lpIcon = new LayoutParams((int) bubbleToggleItem.getIconWidth(), (int) bubbleToggleItem.getIconHeight());
+        LayoutParams lpIcon = new LayoutParams((int) bubbleToggleItem.getIconWidth(),
+                (int) bubbleToggleItem.getIconHeight());
         lpIcon.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
         iconView.setLayoutParams(lpIcon);
         iconView.setImageDrawable(bubbleToggleItem.getIcon());
 
-        //create the nav title
+        // create the nav title
         titleView = new TextView(context);
         LayoutParams lpTitle = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         lpTitle.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
@@ -293,24 +301,24 @@ public class BubbleToggleView extends RelativeLayout {
         titleView.setTextColor(bubbleToggleItem.getTitleColorActive());
         titleView.setText(bubbleToggleItem.getTitle());
         titleView.setTextSize(TypedValue.COMPLEX_UNIT_PX, bubbleToggleItem.getTitleSize());
-        //get the current measured title width
+        // get the current measured title width
         titleView.setVisibility(VISIBLE);
-        //update the margin of the text view
+        // update the margin of the text view
         titleView.setPadding(bubbleToggleItem.getTitlePadding(), 0, bubbleToggleItem.getTitlePadding(), 0);
-        //measure the content width
-        titleView.measure(0, 0);       //must call measure!
-        measuredTitleWidth = titleView.getMeasuredWidth();  //get width
-        //limit measured width, based on the max width
+        // measure the content width
+        titleView.measure(0, 0); // must call measure!
+        measuredTitleWidth = titleView.getMeasuredWidth(); // get width
+        // limit measured width, based on the max width
         if (measuredTitleWidth > maxTitleWidth)
             measuredTitleWidth = maxTitleWidth;
 
-        //change the visibility
+        // change the visibility
         titleView.setVisibility(GONE);
 
         addView(iconView);
         addView(titleView);
 
-        //set the initial state
+        // set the initial state
         setInitialState(isActive);
     }
 
@@ -324,7 +332,7 @@ public class BubbleToggleView extends RelativeLayout {
      * @param isActive current state
      */
     public void setInitialState(boolean isActive) {
-        //set the background
+        // set the background
         setBackground(bubbleToggleItem.getShape());
 
         if (isActive) {
@@ -377,9 +385,9 @@ public class BubbleToggleView extends RelativeLayout {
             public void onAnimationUpdate(ValueAnimator animation) {
                 float value = (float) animation.getAnimatedValue();
                 titleView.setWidth((int) (measuredTitleWidth * value));
-                //end of animation
+                // end of animation
                 if (value >= 1.0f) {
-                    //do something
+                    // do something
                 }
             }
         });
@@ -389,7 +397,7 @@ public class BubbleToggleView extends RelativeLayout {
             TransitionDrawable trans = (TransitionDrawable) getBackground();
             trans.startTransition(animationDuration);
         } else {
-            //if not showing Shape Always and valid shape color present, use that as tint
+            // if not showing Shape Always and valid shape color present, use that as tint
             if (!showShapeAlways && bubbleToggleItem.getShapeColor() != Integer.MIN_VALUE)
                 ViewUtils.updateDrawableColor(bubbleToggleItem.getShape(), bubbleToggleItem.getShapeColor());
             setBackground(bubbleToggleItem.getShape());
@@ -409,7 +417,7 @@ public class BubbleToggleView extends RelativeLayout {
             public void onAnimationUpdate(ValueAnimator animation) {
                 float value = (float) animation.getAnimatedValue();
                 titleView.setWidth((int) (measuredTitleWidth * value));
-                //end of animation
+                // end of animation
                 if (value <= 0.0f)
                     titleView.setVisibility(GONE);
             }
@@ -420,7 +428,8 @@ public class BubbleToggleView extends RelativeLayout {
             TransitionDrawable trans = (TransitionDrawable) getBackground();
             trans.reverseTransition(animationDuration);
         } else {
-            if (!showShapeAlways) setBackground(null);
+            if (!showShapeAlways)
+                setBackground(null);
         }
     }
 
@@ -461,7 +470,8 @@ public class BubbleToggleView extends RelativeLayout {
                 - ((int) bubbleToggleItem.getIconWidth())
                 + titleView.getPaddingRight() + titleView.getPaddingLeft();
 
-        //if the new calculate title width is less than current one, update the titleView specs
+        // if the new calculate title width is less than current one, update the
+        // titleView specs
         if (newTitleWidth > 0 && newTitleWidth < measuredTitleWidth) {
             measuredTitleWidth = titleView.getMeasuredWidth();
         }

@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-package com.blaze.house;
+package org.pixel.extend;
 
 import android.content.Context;
 
 import com.android.settings.core.BasePreferenceController;
-
 
 public class TopLevelExtensionsEntryPreferenceController extends BasePreferenceController {
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.blaze.house.categories;
+package org.pixel.extend.categories;
 
 import android.content.ContentResolver;
 import android.os.Bundle;
@@ -27,7 +27,7 @@ import com.android.settings.SettingsPreferenceFragment;
 
 public class Lockscreen extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
-    
+
     private static final String TAG = "Lockscreen";
 
     @Override
