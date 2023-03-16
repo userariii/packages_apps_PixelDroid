@@ -91,7 +91,7 @@
             app:extensions_shape="@drawable/navigation_transition_background_drawable_system"
             app:extensions_title="@string/system_category" />
         
-        <org.pixel.extend.navigation.BubbleToggleView
+        <!-- <org.pixel.extend.navigation.BubbleToggleView
             android:id="@+id/hardware_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
             app:extensions_colorInactive="@color/color_inactive"
             app:extensions_icon="@drawable/ic_hardware_category"
             app:extensions_shape="@drawable/navigation_transition_background_drawable_lockscreen"
-            app:extensions_title="@string/hardware_category" />
+            app:extensions_title="@string/hardware_category" /> -->
 
     </org.pixel.extend.navigation.BubbleNavigationConstraintView>
 

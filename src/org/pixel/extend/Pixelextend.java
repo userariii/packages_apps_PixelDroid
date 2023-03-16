@@ -125,9 +125,9 @@ public class Pixelextend extends SettingsPreferenceFragment implements
             super(fm);
             frags[0] = new Themes();
             frags[1] = new StatusBar();
-            frags[2] = new NotificationsPanel();
-            frags[3] = new Lockscreen();
-            frags[4] = new System();
+            // frags[2] = new NotificationsPanel();
+            frags[2] = new Lockscreen();
+            frags[3] = new System();
         }
 
         @Override
@@ -151,7 +151,7 @@ public class Pixelextend extends SettingsPreferenceFragment implements
         titleString = new String[] {
                 getString(R.string.themes_category),
                 getString(R.string.status_bar_category),
-                getString(R.string.notifications_panel_category),
+                // getString(R.string.notifications_panel_category),
                 getString(R.string.lockscreen_category),
                 getString(R.string.system_category), };
 
